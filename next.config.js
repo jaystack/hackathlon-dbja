@@ -1,4 +1,6 @@
 
 module.exports = {
-  // quiet: process.env.NODE_ENV === 'production',
+  build: {
+    assetsPublicPath: '/static',
+  }
 };
