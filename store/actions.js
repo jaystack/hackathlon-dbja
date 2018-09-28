@@ -28,6 +28,11 @@ export const takeBet = (bet, check) => dispatch => (
   })
 );
 
+export const BOOK_RESULT = 'BOOK_RESULT';
+export const bookResult = () => ({
+  type: BOOK_RESULT,
+});
+
 export const RESET = 'RESET';
 export const reset = () => ({
   type: RESET,

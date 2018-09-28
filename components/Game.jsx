@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { say } from '../lib/dealer';
-import { nextGamePhase, takeBet, clearBet } from '../store/actions';
+import { nextGamePhase, takeBet, clearBet, bookResult } from '../store/actions';
 
 class Game extends Component {
   componentDidMount() {
@@ -30,9 +30,17 @@ class Game extends Component {
     } else if (nextProps.gamePhase === 'betTaken') {
       await say('bet-taken1'); // TODO variants
       this.props.nextPhase();
-    } else if (phaseChanged && nextProps.gamePhase === 'result') {
-      await say('result1'); // TODO variants
-      this.props.clearBet();
+    } else if (nextProps.gamePhase === 'result') {
+      if (phaseChanged) {
+        await say('result1'); // TODO variants
+        this.props.bookResult();
+        this.props.clearBet();
+      } else if (this.props.balance !== nextProps.balance) { // booked
+        if (nextProps.balance < 0) {
+          this.props.nextPhase();
+        }
+      }
+      
     }
   }
   nextTurn() {
@@ -42,7 +50,11 @@ class Game extends Component {
     return (
       <div>
         Game
-        {this.props.gamePhase === 'result' && 
+        <br />
+        Balance: {this.props.balance}<br />
+        Your bet: {this.props.bet}
+        <br />
+        {(this.props.gamePhase === 'result' && this.props.balance > 0) && 
           <button onClick={() => this.nextTurn()} >Next round</button>
         }
       </div>
@@ -56,12 +68,14 @@ const mapStateToProps = state => ({
   gamePhase: state.gamePhase,
   bet: state.bet,
   check: state.check,
+  balance: state.balance
 });
 
 const mapDispatchToProps = dispatch => ({
   nextPhase: () => dispatch(nextGamePhase()),
   takeBet: (bet, check) => dispatch(takeBet(bet, check)),
   clearBet: () => dispatch(clearBet()),
+  bookResult: () => dispatch(bookResult()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);

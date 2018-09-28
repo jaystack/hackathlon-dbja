@@ -1,9 +1,9 @@
 import {
-  SPEAK_RESULT, CHANGE_GAME_PHASE, RESET, NEXT_GAME_PHASE, TAKE_BET_SUCCESS, CLEAR_BET
+  SPEAK_RESULT, CHANGE_GAME_PHASE, RESET, NEXT_GAME_PHASE, TAKE_BET_SUCCESS, CLEAR_BET, BOOK_RESULT
 } from './actions';
 
 export const initialState = {
-  gamePhase: 'shuffle', // welcome | shuffle | takeBet | betTaken | result | gameOver
+  gamePhase: 'welcome', // welcome | shuffle | takeBet | betTaken | result | gameOver
   lastSpeakResult: { text: null },
   balance: 100,
   bet: null,
@@ -45,6 +45,12 @@ export const reducer = (state = initialState, action) => {
         ...state,
         bet,
         check,
+      }
+    }
+    case BOOK_RESULT: {
+      return {
+        ...state,
+        balance: state.balance - state.bet,
       }
     }
     case CLEAR_BET: {
