@@ -29,9 +29,7 @@ class Layout extends Component {
           <script src="https://vjs.zencdn.net/ie8/ie8-version/videojs-ie8.min.js"></script>
         </Head>
         <div className="bg">
-          <div>
-            <p>{this.props.userName}</p>
-          </div>
+          <div className="username">User: {this.props.userName}</div>
 
           {this.props.children}
 
