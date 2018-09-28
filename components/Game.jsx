@@ -17,8 +17,9 @@ class Game extends Component {
     } else if (nextProps.gamePhase === 'takeBet') {
       if (this.props.lastSpeakResult.text === nextProps.lastSpeakResult.text) {
         await say('take-bet'); // TODO variants
+      } else {
         this.props.nextPhase();
-      }      
+      }
     } else if (nextProps.gamePhase === 'betTaken') {
       await say('bet-taken1'); // TODO variants
       this.props.nextPhase();
