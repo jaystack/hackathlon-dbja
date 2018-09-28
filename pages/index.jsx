@@ -6,27 +6,15 @@ import Game from '../components/Game';
 import GameOver from '../components/GameOver';
 import apiClient from '../lib/apiClient';
 import {
-  counterIncrease,
-  counterDecrease,
-  counterSteps,
+
 } from '../store/actions';
 
-const styles = theme => ({
-  textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: '100%',
-  },
-  button: {
-    margin: theme.spacing.unit,
-  },
-});
 
 class Index extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      phase: 'welcome'
+      // phase: 'welcome'
     }
   }
   // static async getInitialProps() {
@@ -35,17 +23,15 @@ class Index extends Component {
   //     greetingFromApi,
   //   };
   // }
-  speak() {
 
-  }
 
   getBody() {
-    console.log(this.state.phase)
-    switch (this.state.phase) {
+    console.log(this.props.gamePhase)
+    switch (this.props.gamePhase) {
       case 'welcome' : return <Welcome />;
       case 'game' : return <Game />;
       case 'gameOver' : return <GameOver />;
-      default: return this.state.phase;
+      default: return this.props.gamePhase;
     }
   }
 
@@ -59,13 +45,11 @@ class Index extends Component {
 }
 
 const mapStateToProps = state => ({
-  counter: state.counter,
+  gamePhase: state.gamePhase,
 });
 
 const mapDispatchToProps = dispatch => ({
-  increase: () => dispatch(counterIncrease()),
-  decrease: () => dispatch(counterDecrease()),
-  steps: () => dispatch(counterSteps()),
+
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Index);

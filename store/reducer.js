@@ -1,23 +1,23 @@
 import {
-  COUNTER_INCREASE,
-  COUNTER_DECREASE,
+  SPEAK_RESULT, CHANGE_GAME_PHASE,
 } from './actions';
 
 export const initialState = {
-  counter: 0,
+  gamePhase: 'welcome',
+  lastSpeakResult: null,
 };
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case COUNTER_INCREASE:
+    case SPEAK_RESULT:
       return {
         ...state,
-        counter: state.counter + 1,
+        lastSpeakResult: action.payload.SpeakResult
       };
-    case COUNTER_DECREASE:
+    case CHANGE_GAME_PHASE:
       return {
         ...state,
-        counter: state.counter - 1,
+        gamePhase: action.payload.phase
       };
     default: return state;
   }

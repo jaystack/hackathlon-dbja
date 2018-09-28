@@ -1,47 +1,62 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Head from 'next/head';
+import speak from '../lib/speaker';
+import { speakResult } from '../store/actions';
 
-const styles = theme => ({
-  root: {
-    paddingTop: theme.spacing.unit * 8,
-    flexGrow: 1,
-    zIndex: 1,
-    overflow: 'hidden',
-    position: 'relative',
-    display: 'flex',
-  },
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-  },
-  content: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.default,
-    padding: theme.spacing.unit * 3,
-    minWidth: 0, // So the Typography noWrap works
-  },
+
+class Layout extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isSpeaking: false,
+    }
+  }
+  async speak() {
+    await this.setState({ isSpeaking: true });
+    const result = await speak();
+    this.props.speakResult(result);
+    await this.setState({ isSpeaking: false });
+  }
+  render() {
+    return (
+      <div>
+        <Head>
+          <title>Game title</title>
+          <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" />
+        </Head>
+        <div>
+          <div>
+            header
+          </div>
+          <div>
+            {this.props.children}  
+          </div>
+          <div>
+            footer
+            <button
+              onClick={() => this.speak()}
+              disabled={this.state.isSpeaking}
+            >
+              Speak
+            </button>
+            {this.state.isSpeaking &&
+              <span>...</span>
+            }
+          </div>
+        </div>
+      </div>
+    );
+  }
+};
+
+
+const mapStateToProps = state => ({
+  // counter: state.counter,
 });
 
-const Layout = ({ title, classes, children }) => (
-  <div>
-    <Head>
-      <title>Game title</title>
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" />
-    </Head>
-    <div>
-      <div>
-        header
-      </div>
-      <div>
-        {children}  
-      </div>
-      <div>
-        footer
-        <button>Speak</button>
-      </div>
-    </div>
-  </div>
-);
+const mapDispatchToProps = dispatch => ({
+  speakResult: (result) => dispatch(speakResult(result)),
+});
 
-
-export default Layout;
+export default connect(mapStateToProps, mapDispatchToProps)(Layout);
