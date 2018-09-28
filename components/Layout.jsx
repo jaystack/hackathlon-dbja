@@ -30,7 +30,6 @@ class Layout extends Component {
         </Head>
         <div className="bg">
           <div>
-            header
             <p>{this.props.userName}</p>
           </div>
 
@@ -39,21 +38,16 @@ class Layout extends Component {
           <div className="msg">{this.props.lastSpeakResult && this.props.lastSpeakResult.text}</div>
 
           <div>
-            footer
-            <button
+            <button className="speak-btn"
               onClick={() => this.speak()}
               disabled={!this.props.letSpeak || this.state.isSpeaking}
             >
               Speak
             </button>
+            <div class="michrophone"></div>
             {this.state.isSpeaking &&
               <span>...</span>
             }
-            <button
-              onClick={() => this.props.reset()}
-            >
-              Reset game
-            </button>
           </div>
         </div>
       </div>
