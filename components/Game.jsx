@@ -9,6 +9,8 @@ class Game extends Component {
   componentDidMount() {
     console.log('shuffle animation');
     this.props.nextPhase();
+
+  
   }
   async componentWillReceiveProps(nextProps) {
     const phaseChanged = this.props.gamePhase !== nextProps.gamePhase;
@@ -80,6 +82,8 @@ class Game extends Component {
 
           <button onClick={() => this.nextTurn()} >Next round</button>
         }
+
+        <div id="anim" className="anim">XXXXXXX</div>
       </div>
     )
   }
