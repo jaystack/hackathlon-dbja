@@ -3,7 +3,7 @@ import {
 } from './actions';
 
 export const initialState = {
-  gamePhase: 'welcome', // welcome | shuffle | takeBet | result | gameOver
+  gamePhase: 'welcome', // welcome | shuffle | takeBet | betTaken | result | gameOver
   lastSpeakResult: { text: null },
   balance: 100,
 };
@@ -27,7 +27,8 @@ export const reducer = (state = initialState, action) => {
       switch (state.gamePhase) {
         case 'welcome': gamePhase = 'shuffle'; break;
         case 'shuffle': gamePhase = 'takeBet'; break;
-        case 'takeBet': gamePhase = 'result'; break;
+        case 'takeBet': gamePhase = 'betTaken'; break;
+        case 'betTaken': gamePhase = 'result'; break;
         case 'result': gamePhase = state.balance <= 0 ? 'gameOver' : 'shuffle'; break;
         case 'gameOver': gamePhase = 'welcome'; break;
       }
