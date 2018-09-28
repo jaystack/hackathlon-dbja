@@ -28,7 +28,9 @@ class Index extends Component {
   getBody() {
     switch (this.props.gamePhase) {
       case 'welcome' : return <Welcome />;
-      case 'game' : return <Game />;
+      case 'takeBet' :
+      case 'shuffle' :
+      case 'result' : return <Game />;
       case 'gameOver' : return <GameOver />;
       default: return this.props.gamePhase;
     }

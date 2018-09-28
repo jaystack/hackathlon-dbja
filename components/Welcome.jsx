@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { changeGamePhase } from '../store/actions';
+import { say } from '../lib/dealer';
 
 class Welcome extends Component {
-  componentWillReceiveProps(nextProps) {
-    console.log(nextProps);
+  componentDidMount() {
+    say('first-welcome');
+  }
+  async componentWillReceiveProps(nextProps) {
     if (nextProps.lastSpeakResult.text !== null) {
       if (this.props.lastSpeakResult.text !== nextProps.lastSpeakResult.text) {
+        await say('greeting');
         this.props.nextPhase();
       }
     }
   }
   render() {
-    console.log(this.props)
     return (
       <div>
         Say your name!
