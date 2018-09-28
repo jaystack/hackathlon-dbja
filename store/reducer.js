@@ -24,7 +24,6 @@ export const reducer = (state = initialState, action) => {
         gamePhase: action.payload.phase
       };
     case USER_CREATED: {
-      debugger;
       return {
         ...state,
         userName: action.payload.userName

@@ -22,7 +22,7 @@ export const clearBet = () => ({
 
 export const takeBet = (bet, check) => dispatch => (
   new Promise((resolve) => {
-    // TODO fetch
+    
     dispatch(takeBetSuccess(bet, check));
     resolve();
   })
