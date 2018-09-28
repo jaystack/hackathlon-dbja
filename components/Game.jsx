@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import _ from 'lodash';
 import { say } from '../lib/dealer';
 import { nextGamePhase, takeBet, clearBet, bookResult, letSpeak, setResult } from '../store/actions';
+import { postBetResult } from '../lib/apiClient';
 
 class Game extends Component {
   componentDidMount() {
@@ -33,6 +34,7 @@ class Game extends Component {
           }
           this.props.setResult(result);
 
+          postBetResult(this.props.userName, bet, result === check);
 
           this.props.takeBet(bet, check);
         }
@@ -86,7 +88,8 @@ const mapStateToProps = state => ({
   bet: state.bet,
   check: state.check,
   balance: state.balance,
-  result: state.result
+  result: state.result,
+  userName: state.userName,
 });
 
 const mapDispatchToProps = dispatch => ({
