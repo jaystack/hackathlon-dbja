@@ -28,8 +28,8 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url("/static/bg.png");
-  background-size: auto 100%;
+  background-image: url("/static/bg.png"), url("/static/level-bg.jpg");
+  background-size: auto 100%, 100% 100%;
   background-position: center;
   background-repeat: no-repeat;
   border: solid 1px green;
@@ -38,13 +38,13 @@
 
 .coin {
   color: yellow;
-  font-size: 60px;
+  font-size: 50px;
   position: fixed;
-  right:12%;
-  top: 60%;
+  right: 16%;
+  top: 58%;
   font-family: arial;
   background: rgba(0,0,0,0.2);
-  border-radius: 40%;
+  border-radius: 30%;
   padding: 5px 20px;
 }
 
@@ -61,15 +61,35 @@
   transform: translateX(-50%);
 }
 
-.round {
+.bet {
   color: yellow;
   font-size: 40px;
   position: fixed;
   left: 21%;
-  bottom: 35%;
+  bottom: 32%;
   font-family: arial;
   background: rgba(0,0,0,0.2);
   border-radius: 2px;
   padding: 5px 20px;
   transform: translateX(-50%);
+  text-align: center;
+}
+
+.round {
+  color: yellow;
+  font-size: 40px;
+  position: fixed;
+  right: 24%;
+  top: 14%;
+}
+
+
+.michrophone {
+  background-image: url("/static/microphone.png");
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background-size: 100% 100%;
 }
