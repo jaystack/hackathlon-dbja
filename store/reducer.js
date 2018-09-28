@@ -1,5 +1,5 @@
 import {
-  SPEAK_RESULT, CHANGE_GAME_PHASE, RESET, NEXT_GAME_PHASE, TAKE_BET_SUCCESS, CLEAR_BET, BOOK_RESULT, USER_CREATED
+  SPEAK_RESULT, CHANGE_GAME_PHASE, RESET, NEXT_GAME_PHASE, TAKE_BET_SUCCESS, CLEAR_BET, BOOK_RESULT, USER_CREATED, LET_SPEAK
 } from './actions';
 
 export const initialState = {
@@ -9,6 +9,7 @@ export const initialState = {
   balance: 100,
   bet: null,
   check: null,
+  letSpeak: false,
 };
 
 export const reducer = (state = initialState, action) => {
@@ -65,6 +66,12 @@ export const reducer = (state = initialState, action) => {
         ...state,
         bet: null,
         check: null,
+      }
+    }
+    case LET_SPEAK: {
+      return {
+        ...state,
+        letSpeak: action.payload.letSpeak
       }
     }
     default: return state;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { say } from '../lib/dealer';
-import { nextGamePhase, takeBet, clearBet, bookResult } from '../store/actions';
+import { nextGamePhase, takeBet, clearBet, bookResult, letSpeak } from '../store/actions';
 
 class Game extends Component {
   componentDidMount() {
@@ -20,7 +20,9 @@ class Game extends Component {
       if (nextProps.bet === null) {
         if (!lastResultChanged) {
           await say('take-bet'); // TODO variants
+          this.props.letSpeak(true);
         } else {
+          this.props.letSpeak(false);
           const { bet, check } = nextProps.lastSpeakResult;
           this.props.takeBet(bet, check);
         }
@@ -82,6 +84,7 @@ const mapDispatchToProps = dispatch => ({
   takeBet: (bet, check) => dispatch(takeBet(bet, check)),
   clearBet: () => dispatch(clearBet()),
   bookResult: () => dispatch(bookResult()),
+  letSpeak: (_letSpeak) => dispatch(letSpeak(_letSpeak)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);

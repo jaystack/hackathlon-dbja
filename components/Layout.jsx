@@ -40,7 +40,7 @@ class Layout extends Component {
             footer
             <button
               onClick={() => this.speak()}
-              disabled={this.state.isSpeaking}
+              disabled={!this.props.letSpeak || this.state.isSpeaking}
             >
               Speak
             </button>
@@ -62,6 +62,7 @@ class Layout extends Component {
 
 const mapStateToProps = state => ({
    userName: state.userName,
+   letSpeak: state.letSpeak,
 });
 
 const mapDispatchToProps = dispatch => ({
