@@ -1,10 +1,11 @@
 import {
-  SPEAK_RESULT, CHANGE_GAME_PHASE, RESET
+  SPEAK_RESULT, CHANGE_GAME_PHASE, RESET, NEXT_GAME_PHASE
 } from './actions';
 
 export const initialState = {
-  gamePhase: 'welcome', // welcome | takeBet | shuffle | result | gameOver
+  gamePhase: 'welcome', // welcome | shuffle | takeBet | result | gameOver
   lastSpeakResult: { text: null },
+  balance: 100,
 };
 
 export const reducer = (state = initialState, action) => {
@@ -21,6 +22,20 @@ export const reducer = (state = initialState, action) => {
       };
     case RESET: 
       return initialState;
+    case NEXT_GAME_PHASE: {
+      let gamePhase;
+      switch (state.gamePhase) {
+        case 'welcome': gamePhase = 'shuffle'; break;
+        case 'shuffle': gamePhase = 'takeBet'; break;
+        case 'takeBet': gamePhase = 'result'; break;
+        case 'result': gamePhase = state.balance <= 0 ? 'gameOver' : 'shuffle'; break;
+        case 'gameOver': gamePhase = 'welcome'; break;
+      }
+      return {
+        ...state,
+        gamePhase
+      }
+    }
     default: return state;
   }
 };
