@@ -49,6 +49,12 @@ class Game extends Component {
   render() {
     return (
       <div>
+        <div className="coin">13</div>
+
+        <div className="msg">{this.props.lastSpeakResult.text}</div>
+
+        <div className="round">Round: 1</div>
+
         Game
         <br />
         Balance: {this.props.balance}<br />

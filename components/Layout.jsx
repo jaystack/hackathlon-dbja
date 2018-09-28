@@ -34,11 +34,7 @@ class Layout extends Component {
             <p>{this.props.userName}</p>
           </div>
 
-          <div className="coin">13</div>
-
-          <div className="msg">MSG msg msgmsg msgmsg msgmsg msgmsg msgmsg msgmsg msgmsg msg.</div>
-
-          <div className="round">Round: 1</div>
+          {this.props.children}
 
           <div>
             footer
