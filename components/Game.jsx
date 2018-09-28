@@ -33,16 +33,17 @@ class Game extends Component {
             result = _.difference(['red', 'blue', 'green'], [check])[_.random(0, 1)];
           }
           this.props.setResult(result);
-
-          postBetResult(this.props.userName, bet, result === check);
-
           this.props.takeBet(bet, check);
         }
       } else {
         this.props.nextPhase();
       }
     } else if (nextProps.gamePhase === 'betTaken') {
-      await say('bet-taken', true);
+      const variant = await say('bet-taken', true);
+      // if (variant === 'bet-taken-v4') {
+      //   this.props.takeBet(nextProps.bet * 2, this.props.check);
+      // }
+      postBetResult(this.props.userName, this.props.bet, this.props.result === this.props.check);
       this.props.nextPhase();
     } else if (nextProps.gamePhase === 'result') {
       if (phaseChanged) {
@@ -50,6 +51,9 @@ class Game extends Component {
         await say(file, true);
         this.props.bookResult();
         this.props.clearBet();
+        // setTimeout(() => {
+        //   say('go-to-next');
+        // }, 200);
       } else if (this.props.balance !== nextProps.balance) { // booked
         if (nextProps.balance < 0) {
           this.props.nextPhase();

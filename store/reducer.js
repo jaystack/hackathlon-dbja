@@ -1,9 +1,9 @@
 import {
-  SPEAK_RESULT, CHANGE_GAME_PHASE, RESET, NEXT_GAME_PHASE, TAKE_BET_SUCCESS, CLEAR_BET, BOOK_RESULT, USER_CREATED, LET_SPEAK, SET_RESULT
+  SPEAK_RESULT, CHANGE_GAME_PHASE, RESET, NEXT_GAME_PHASE, TAKE_BET, CLEAR_BET, BOOK_RESULT, USER_CREATED, LET_SPEAK, SET_RESULT
 } from './actions';
 
 export const initialState = {
-  gamePhase: 'welcome', // welcome | shuffle | takeBet | betTaken | result | gameOver
+  gamePhase: 'shuffle', // welcome | shuffle | takeBet | betTaken | result | gameOver
   lastSpeakResult: { text: null },
   userName: '',
   balance: 0,
@@ -49,7 +49,7 @@ export const reducer = (state = initialState, action) => {
         gamePhase
       }
     }
-    case TAKE_BET_SUCCESS: {
+    case TAKE_BET: {
       const { bet, check } = action.payload;
       return {
         ...state,
@@ -60,7 +60,7 @@ export const reducer = (state = initialState, action) => {
     case BOOK_RESULT: {
       return {
         ...state,
-        balance: state.balance - state.bet,
+        balance: state.check === state.result ? state.balance + state.bet : state.balance - state.bet,
       }
     }
     case CLEAR_BET: {
