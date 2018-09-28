@@ -8,6 +8,7 @@ import apiClient from '../lib/apiClient';
 import {
 
 } from '../store/actions';
+// a
 
 
 class Index extends Component {
@@ -29,6 +30,7 @@ class Index extends Component {
     switch (this.props.gamePhase) {
       case 'welcome' : return <Welcome />;
       case 'takeBet' :
+      case 'betTaken' :
       case 'shuffle' :
       case 'result' : return <Game />;
       case 'gameOver' : return <GameOver />;
