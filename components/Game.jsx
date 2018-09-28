@@ -19,7 +19,7 @@ class Game extends Component {
       const lastResultChanged = this.props.lastSpeakResult.text !== nextProps.lastSpeakResult.text;
       if (nextProps.bet === null) {
         if (!lastResultChanged) {
-          await say('take-bet'); // TODO variants
+          await say('take-bet', true);
           this.props.letSpeak(true);
         } else {
           this.props.letSpeak(false);
@@ -30,11 +30,11 @@ class Game extends Component {
         this.props.nextPhase();
       }
     } else if (nextProps.gamePhase === 'betTaken') {
-      await say('bet-taken1'); // TODO variants
+      await say('bet-taken', true);
       this.props.nextPhase();
     } else if (nextProps.gamePhase === 'result') {
       if (phaseChanged) {
-        await say('result1'); // TODO variants
+        await say('result', true);
         this.props.bookResult();
         this.props.clearBet();
       } else if (this.props.balance !== nextProps.balance) { // booked
@@ -60,7 +60,7 @@ class Game extends Component {
         Balance: {this.props.balance}<br />
         Your bet: {this.props.bet}
         <br />
-        {(this.props.gamePhase === 'result' && this.props.balance > 0) && 
+        {(this.props.gamePhase === 'result' && this.props.balance > 0 && this.props.bet === null) && 
           <button onClick={() => this.nextTurn()} >Next round</button>
         }
       </div>
