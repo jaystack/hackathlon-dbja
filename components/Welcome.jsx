@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { nextGamePhase } from '../store/actions';
+import { nextGamePhase, userCreated } from '../store/actions';
 import { say } from '../lib/dealer';
+import { createUser } from '../lib/apiClient';
 
 class Welcome extends Component {
   constructor(props) {
@@ -22,6 +23,8 @@ class Welcome extends Component {
         } else {
           await say('name-second1');
           await say('name-second2');
+          await createUser("dumbhead1");
+          this.props.userCreated("dumbhead1");
           this.props.nextPhase();
         }
       }
@@ -43,6 +46,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   nextPhase: () => dispatch(nextGamePhase()),
+  userCreated: (userName) => dispatch(userCreated(userName)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Welcome);
