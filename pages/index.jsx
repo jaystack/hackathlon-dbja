@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
-import { withStyles } from '@material-ui/core/styles';
-import Tooltip from '@material-ui/core/Tooltip';
-import Button from '@material-ui/core/Button';
-import AddIcon from '@material-ui/icons/Add';
-import RemoveIcon from '@material-ui/icons/Remove';
 import Layout from '../components/Layout';
+import Welcome from '../components/Welcome';
+import Game from '../components/Game';
+import GameOver from '../components/GameOver';
 import apiClient from '../lib/apiClient';
 import {
   counterIncrease,
@@ -28,18 +23,37 @@ const styles = theme => ({
 });
 
 class Index extends Component {
-  static async getInitialProps() {
-    const greetingFromApi = await apiClient.getGreeting();
-    return {
-      greetingFromApi,
-    };
+  constructor(props) {
+    super(props);
+    this.state = {
+      phase: 'welcome'
+    }
+  }
+  // static async getInitialProps() {
+  //   const greetingFromApi = await apiClient.getGreeting();
+  //   return {
+  //     greetingFromApi,
+  //   };
+  // }
+  speak() {
+
+  }
+
+  getBody() {
+    console.log(this.state.phase)
+    switch (this.state.phase) {
+      case 'welcome' : return <Welcome />;
+      case 'game' : return <Game />;
+      case 'gameOver' : return <GameOver />;
+      default: return this.state.phase;
+    }
   }
 
   render() {
     return (
-      <div>
-        Helloka
-      </div>
+      <Layout>
+        {this.getBody()}
+      </Layout>
     );
   }
 }
@@ -54,9 +68,4 @@ const mapDispatchToProps = dispatch => ({
   steps: () => dispatch(counterSteps()),
 });
 
-export default
-withStyles(styles)(
-  connect(mapStateToProps, mapDispatchToProps)(
-    Index,
-  ),
-);
+export default connect(mapStateToProps, mapDispatchToProps)(Index);
