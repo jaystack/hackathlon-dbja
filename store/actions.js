@@ -44,8 +44,14 @@ export const speakResult = (speakResult) => ({
   payload: { speakResult }
 });
 
+export const LET_SPEAK = 'LET_SPEAK';
+export const letSpeak = (letSpeak) => ({
+  type: LET_SPEAK,
+  payload: { letSpeak }
+});
+
 export const USER_CREATED = 'USER_CREATED';
-export const userCreated = (userName) => ({
+export const userCreated = (user) => ({
   type: USER_CREATED,
-  payload: { userName }
+  payload: { user }
 });

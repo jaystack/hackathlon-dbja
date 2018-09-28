@@ -1,14 +1,15 @@
 import {
-  SPEAK_RESULT, CHANGE_GAME_PHASE, RESET, NEXT_GAME_PHASE, TAKE_BET_SUCCESS, CLEAR_BET, BOOK_RESULT, USER_CREATED
+  SPEAK_RESULT, CHANGE_GAME_PHASE, RESET, NEXT_GAME_PHASE, TAKE_BET_SUCCESS, CLEAR_BET, BOOK_RESULT, USER_CREATED, LET_SPEAK
 } from './actions';
 
 export const initialState = {
   gamePhase: 'welcome', // welcome | shuffle | takeBet | betTaken | result | gameOver
   lastSpeakResult: { text: null },
   userName: '',
-  balance: 100,
+  balance: 0,
   bet: null,
   check: null,
+  letSpeak: false,
 };
 
 export const reducer = (state = initialState, action) => {
@@ -26,7 +27,8 @@ export const reducer = (state = initialState, action) => {
     case USER_CREATED: {
       return {
         ...state,
-        userName: action.payload.userName
+        userName: action.payload.user.name,
+        balance: action.payload.user.coin
       };
     }
     case RESET:
@@ -65,6 +67,12 @@ export const reducer = (state = initialState, action) => {
         ...state,
         bet: null,
         check: null,
+      }
+    }
+    case LET_SPEAK: {
+      return {
+        ...state,
+        letSpeak: action.payload.letSpeak
       }
     }
     default: return state;

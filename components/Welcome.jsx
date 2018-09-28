@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { nextGamePhase, userCreated } from '../store/actions';
+import { nextGamePhase, userCreated, letSpeak } from '../store/actions';
 import { say } from '../lib/dealer';
 import { createUser } from '../lib/apiClient';
 
@@ -11,20 +11,23 @@ class Welcome extends Component {
       nameTries: 0,
     }
   }
-  componentDidMount() {
-    say('first-welcome');
+  async componentDidMount() {
+    await say('first-welcome');
+    this.props.letSpeak(true);
   }
   async componentWillReceiveProps(nextProps) {
     if (nextProps.lastSpeakResult.text !== null) {
       if (this.props.lastSpeakResult.text !== nextProps.lastSpeakResult.text) {
+        this.props.letSpeak(false);
         if (this.state.nameTries === 0) {
           await say('name-first');
           this.setState({ nameTries: 1 });
+          this.props.letSpeak(true);
         } else {
           await say('name-second1');
           await say('name-second2');
-          await createUser("dumbhead1");
-          this.props.userCreated("dumbhead1");
+          const newUser = await createUser("dumbhead1");
+          this.props.userCreated(newUser);
           this.props.nextPhase();
         }
       }
@@ -46,7 +49,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   nextPhase: () => dispatch(nextGamePhase()),
-  userCreated: (userName) => dispatch(userCreated(userName)),
+  userCreated: (user) => dispatch(userCreated(user)),
+  letSpeak: (_letSpeak) => dispatch(letSpeak(_letSpeak)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Welcome);

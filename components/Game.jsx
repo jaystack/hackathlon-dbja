@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { say } from '../lib/dealer';
-import { nextGamePhase, takeBet, clearBet, bookResult } from '../store/actions';
+import { nextGamePhase, takeBet, clearBet, bookResult, letSpeak } from '../store/actions';
 
 class Game extends Component {
   componentDidMount() {
@@ -19,8 +19,10 @@ class Game extends Component {
       const lastResultChanged = this.props.lastSpeakResult.text !== nextProps.lastSpeakResult.text;
       if (nextProps.bet === null) {
         if (!lastResultChanged) {
-          await say('take-bet'); // TODO variants
+          await say('take-bet', true);
+          this.props.letSpeak(true);
         } else {
+          this.props.letSpeak(false);
           const { bet, check } = nextProps.lastSpeakResult;
           this.props.takeBet(bet, check);
         }
@@ -28,11 +30,11 @@ class Game extends Component {
         this.props.nextPhase();
       }
     } else if (nextProps.gamePhase === 'betTaken') {
-      await say('bet-taken1'); // TODO variants
+      await say('bet-taken', true);
       this.props.nextPhase();
     } else if (nextProps.gamePhase === 'result') {
       if (phaseChanged) {
-        await say('result1'); // TODO variants
+        await say('result', true);
         this.props.bookResult();
         this.props.clearBet();
       } else if (this.props.balance !== nextProps.balance) { // booked
@@ -49,10 +51,13 @@ class Game extends Component {
   render() {
     return (
       <div>
+
         <div className="coin">{this.props.balance}</div>
         <div className="round">Round:</div>
         <div className="bet">Your bet:<br />{this.props.bet}</div>
-        {(this.props.gamePhase === 'result' && this.props.balance > 0) && 
+       
+        {(this.props.gamePhase === 'result' && this.props.balance > 0 && this.props.bet === null) && 
+
           <button onClick={() => this.nextTurn()} >Next round</button>
         }
       </div>
@@ -74,6 +79,7 @@ const mapDispatchToProps = dispatch => ({
   takeBet: (bet, check) => dispatch(takeBet(bet, check)),
   clearBet: () => dispatch(clearBet()),
   bookResult: () => dispatch(bookResult()),
+  letSpeak: (_letSpeak) => dispatch(letSpeak(_letSpeak)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);
