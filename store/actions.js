@@ -1,19 +1,3 @@
-
-// export const counterSteps = () => dispatch => (
-//   new Promise((resolve) => {
-//     let steps = 0;
-//     const ms = process.env.NODE_ENV === 'test' ? 0 : 50;
-//     const interval = setInterval(() => {
-//       if (steps++ >= 10) {
-//         clearInterval(interval);
-//         resolve();
-//       } else {
-//         dispatch(counterIncrease());
-//       }
-//     }, ms);
-//   })
-// );
-
 export const CHANGE_GAME_PHASE = 'CHANGE_GAME_PHASE';
 export const changeGamePhase = (phase) => ({
   type: CHANGE_GAME_PHASE,
@@ -24,6 +8,25 @@ export const NEXT_GAME_PHASE = 'NEXT_GAME_PHASE';
 export const nextGamePhase = (phase) => ({
   type: NEXT_GAME_PHASE,
 });
+
+export const TAKE_BET_SUCCESS = 'TAKE_BET_SUCCESS';
+export const takeBetSuccess = (bet, check) => ({
+  type: TAKE_BET_SUCCESS,
+  payload: { bet, check },
+});
+
+export const CLEAR_BET = 'CLEAR_BET';
+export const clearBet = () => ({
+  type: CLEAR_BET,
+});
+
+export const takeBet = (bet, check) => dispatch => (
+  new Promise((resolve) => {
+    // TODO fetch
+    dispatch(takeBetSuccess(bet, check));
+    resolve();
+  })
+);
 
 export const RESET = 'RESET';
 export const reset = () => ({
