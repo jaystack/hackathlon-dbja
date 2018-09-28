@@ -28,6 +28,7 @@ class Layout extends Component {
         <div>
           <div>
             header
+            <p>{this.props.userName}</p>
           </div>
           <div>
             {this.props.children}  
@@ -57,7 +58,7 @@ class Layout extends Component {
 
 
 const mapStateToProps = state => ({
-  // counter: state.counter,
+   userName: state.userName,
 });
 
 const mapDispatchToProps = dispatch => ({
