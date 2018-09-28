@@ -23,8 +23,8 @@ class Welcome extends Component {
         } else {
           await say('name-second1');
           await say('name-second2');
-          await createUser("dumbhead1");
-          this.props.userCreated("dumbhead1");
+          const newUser = await createUser("dumbhead1");
+          this.props.userCreated(newUser);
           this.props.nextPhase();
         }
       }
@@ -46,7 +46,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   nextPhase: () => dispatch(nextGamePhase()),
-  userCreated: (userName) => dispatch(userCreated(userName)),
+  userCreated: (user) => dispatch(userCreated(user)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Welcome);

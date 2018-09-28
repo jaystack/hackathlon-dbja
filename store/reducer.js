@@ -6,7 +6,7 @@ export const initialState = {
   gamePhase: 'welcome', // welcome | shuffle | takeBet | betTaken | result | gameOver
   lastSpeakResult: { text: null },
   userName: '',
-  balance: 100,
+  balance: 0,
   bet: null,
   check: null,
 };
@@ -26,7 +26,8 @@ export const reducer = (state = initialState, action) => {
     case USER_CREATED: {
       return {
         ...state,
-        userName: action.payload.userName
+        userName: action.payload.user.name,
+        balance: action.payload.user.coin
       };
     }
     case RESET:
