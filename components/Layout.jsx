@@ -36,6 +36,8 @@ class Layout extends Component {
 
           {this.props.children}
 
+          <div className="msg">{this.props.lastSpeakResult && this.props.lastSpeakResult.text}</div>
+
           <div>
             footer
             <button
@@ -62,6 +64,7 @@ class Layout extends Component {
 
 const mapStateToProps = state => ({
    userName: state.userName,
+   lastSpeakResult: state.lastSpeakResult
 });
 
 const mapDispatchToProps = dispatch => ({

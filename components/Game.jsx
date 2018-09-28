@@ -51,8 +51,6 @@ class Game extends Component {
       <div>
         <div className="coin">13</div>
 
-        <div className="msg">{this.props.lastSpeakResult.text}</div>
-
         <div className="round">Round: 1</div>
 
         Game
