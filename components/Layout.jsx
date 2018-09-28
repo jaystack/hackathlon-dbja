@@ -28,34 +28,17 @@ class Layout extends Component {
           <link href="https://vjs.zencdn.net/7.1.0/video-js.css" rel="stylesheet" />
           <script src="https://vjs.zencdn.net/ie8/ie8-version/videojs-ie8.min.js"></script>
         </Head>
-        <div>
+        <div className="bg">
           <div>
             header
             <p>{this.props.userName}</p>
           </div>
 
-          <div>
-            <div className="left-panel">
-              left panel
-            </div>
-            <div>
-              {this.props.children}  
-            </div>
-            <div className="right-panel">
-             right panel
-            </div>
-          </div>
+          <div className="coin">13</div>
 
-          <video id="my-video" className="video-js" preload="auto" width="640" height="264"
-            poster="MY_VIDEO_POSTER.jpg" data-setup="{}">
-            <source src="/static/Anim1-1.mp4" type='video/mp4' />
-              {/* <source src="MY_VIDEO.webm" type='video/webm' /> */}
-                <p className="vjs-no-js">
-                  To view this video please enable JavaScript, and consider upgrading to a web browser that
-      <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
-                </p>
-          </video>
+          <div className="msg">MSG msg msgmsg msgmsg msgmsg msgmsg msgmsg msgmsg msgmsg msg.</div>
 
+          <div className="round">Round: 1</div>
 
           <div>
             footer
