@@ -6,68 +6,19 @@ import { nextGamePhase, takeBet, clearBet, bookResult, letSpeak, setResult } fro
 import { postBetResult } from '../lib/apiClient';
 
 class Game extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showShuffling: false,
+    }
+  }
   componentDidMount() {
     console.log('shuffle animation');
-    this.props.nextPhase();
-
-    var anim = {
-      red: [
-        "/static/red/0001.png",
-        "/static/red/0002.png",
-        "/static/red/0003.png",
-        "/static/red/0004.png",
-        "/static/red/0005.png",
-        "/static/red/0006.png",
-        "/static/red/0007.png",
-        "/static/red/0008.png",
-        "/static/red/0009.png",
-         "/static/red/0010.png",
-        "/static/red/0011.png",
-        "/static/red/0012.png",
-        "/static/red/0013.png",
-        "/static/red/0014.png",
-        "/static/red/0015.png",
-        "/static/red/0016.png",
-        "/static/red/0017.png",
-        "/static/red/0018.png",
-        "/static/red/0019.png",
-         "/static/red/0020.png",
-         "/static/red/0021.png",
-        "/static/red/0022.png",
-        "/static/red/0023.png",
-        "/static/red/0024.png",
-        "/static/red/0025.png",
-        "/static/red/0026.png",
-        "/static/red/0027.png",
-        "/static/red/0028.png",
-        "/static/red/0029.png",
-         "/static/red/0030.png",
-        "/static/red/0031.png",
-        "/static/red/0032.png",
-        "/static/red/0033.png",
-        "/static/red/0034.png",
-        "/static/red/0035.png",
-        "/static/red/0036.png",
-        "/static/red/0037.png",
-        "/static/red/0038.png",
-        "/static/red/0039.png",
-         "/static/red/0040.png",
-        "/static/red/0041.png",
-        "/static/red/0042.png",
-        "/static/red/0043.png",
-        "/static/red/0044.png",
-        "/static/red/0045.png",
-        "/static/red/0046.png",
-        "/static/red/0047.png",
-        "/static/red/0048.png",
-        "/static/red/0049.png",
-         "/static/red/0050.png"
-      ],
-      green: [],
-      blue: []
-    };
-
-
+    this.setState({ showShuffling: true });
+    setTimeout(() => {
+      this.setState({ showShuffling: false });
+      this.props.nextPhase();
+    }, 2000);  
   }
   async componentWillReceiveProps(nextProps) {
     const phaseChanged = this.props.gamePhase !== nextProps.gamePhase;
@@ -75,7 +26,12 @@ class Game extends Component {
       // wait for animation
       // random speaking
       console.log('shuffle animation');
-      this.props.nextPhase();
+      this.setState({ showShuffling: true });
+      setTimeout(() => {
+        this.setState({ showShuffling: false });
+        this.props.nextPhase();
+      }, 2000);  
+      
     } else if (nextProps.gamePhase === 'takeBet') {
       const lastResultChanged = this.props.lastSpeakResult.text !== nextProps.lastSpeakResult.text;
       if (nextProps.bet === null) {
@@ -142,8 +98,12 @@ class Game extends Component {
 
         <div id="anim" className="anim"></div>
 
-        <div className="gameover">Game over</div>
-        <div className="shuffling">Shuffling</div>
+        {this.props.gamePhase === 'gameOver' &&
+          <div className="gameover">Game over</div>
+        }
+        {this.state.showShuffling && 
+          <div className="shuffling">Shuffling</div>
+        }
       </div>
     )
   }
