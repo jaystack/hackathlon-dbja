@@ -81,6 +81,7 @@
   position: fixed;
   right: 24%;
   top: 14%;
+  font-family: arial;
 }
 
 
@@ -90,6 +91,35 @@
   height: 60px;
   position: absolute;
   top: 20px;
-  left: 20px;
+  left: 30px;
   background-size: 100% 100%;
+  pointer-events: none;
+  cursor: pointer;
 }
+
+.michrophone.disabled {
+  opacity: 0.5;
+}
+
+.speak-btn {
+ width: 40px; 
+ height: 45px;
+ position: absolute;
+ left: 35px;
+ top: 25px;
+ cursor: pointer;
+ opacity: 0.01;
+}
+
+
+.username {
+    color: yellow;
+    font-size: 40px;
+    position: fixed;
+    left: 50%;
+    top: 3%;
+    font-family: arial;
+    border-radius: 2px;
+    padding: 5px 20px;
+    transform: translateX(-50%);
+  }

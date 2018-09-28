@@ -69,7 +69,7 @@ class Game extends Component {
         <div className="coin">{this.props.balance}</div>
         <div className="round">Round:</div>
         <div className="bet">Your bet:<br />{this.props.bet}</div>
-       
+        
         {(this.props.gamePhase === 'result' && this.props.balance > 0 && this.props.bet === null) && 
 
           <button onClick={() => this.nextTurn()} >Next round</button>

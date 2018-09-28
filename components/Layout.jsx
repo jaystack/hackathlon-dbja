@@ -29,31 +29,23 @@ class Layout extends Component {
           <script src="https://vjs.zencdn.net/ie8/ie8-version/videojs-ie8.min.js"></script>
         </Head>
         <div className="bg">
-          <div>
-            header
-            <p>{this.props.userName}</p>
-          </div>
+          <div className="username">User: {this.props.userName}</div>
 
           {this.props.children}
 
           <div className="msg">{this.props.lastSpeakResult && this.props.lastSpeakResult.text}</div>
 
           <div>
-            footer
-            <button
+            <button className="speak-btn"
               onClick={() => this.speak()}
               disabled={!this.props.letSpeak || this.state.isSpeaking}
             >
               Speak
             </button>
+            <div className={!this.props.letSpeak || this.state.isSpeaking ? "michrophone disabled" : "michrophone"}></div>
             {this.state.isSpeaking &&
               <span>...</span>
             }
-            <button
-              onClick={() => this.props.reset()}
-            >
-              Reset game
-            </button>
           </div>
         </div>
       </div>
