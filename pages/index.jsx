@@ -32,8 +32,8 @@ class Index extends Component {
       case 'takeBet' :
       case 'betTaken' :
       case 'shuffle' :
+      case 'gameOver' :
       case 'result' : return <Game />;
-      case 'gameOver' : return <GameOver />;
       default: return this.props.gamePhase;
     }
   }

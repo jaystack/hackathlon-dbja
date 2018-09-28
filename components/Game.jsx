@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 import { say } from '../lib/dealer';
-import { nextGamePhase, takeBet, clearBet, bookResult, letSpeak } from '../store/actions';
+import { nextGamePhase, takeBet, clearBet, bookResult, letSpeak, setResult } from '../store/actions';
 
 class Game extends Component {
   componentDidMount() {
@@ -24,6 +25,15 @@ class Game extends Component {
         } else {
           this.props.letSpeak(false);
           const { bet, check } = nextProps.lastSpeakResult;
+
+          // figure out result
+          let result = check;
+          if (bet > 10) {
+            result = _.difference(['red', 'blue', 'green'], [check])[_.random(0, 1)];
+          }
+          this.props.setResult(result);
+
+
           this.props.takeBet(bet, check);
         }
       } else {
@@ -34,7 +44,8 @@ class Game extends Component {
       this.props.nextPhase();
     } else if (nextProps.gamePhase === 'result') {
       if (phaseChanged) {
-        await say('result', true);
+        const file = nextProps.result === nextProps.check ? 'result-won' : 'result-loose';
+        await say(file, true);
         this.props.bookResult();
         this.props.clearBet();
       } else if (this.props.balance !== nextProps.balance) { // booked
@@ -42,7 +53,10 @@ class Game extends Component {
           this.props.nextPhase();
         }
       }
-      
+    } else if (nextProps.gamePhase === 'gameOver') {
+      await say('game-over-1');
+      await say('game-over-2');
+      await say('game-over-3');
     }
   }
   nextTurn() {
@@ -71,7 +85,8 @@ const mapStateToProps = state => ({
   gamePhase: state.gamePhase,
   bet: state.bet,
   check: state.check,
-  balance: state.balance
+  balance: state.balance,
+  result: state.result
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -80,6 +95,7 @@ const mapDispatchToProps = dispatch => ({
   clearBet: () => dispatch(clearBet()),
   bookResult: () => dispatch(bookResult()),
   letSpeak: (_letSpeak) => dispatch(letSpeak(_letSpeak)),
+  setResult: (result) => dispatch(setResult(result)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Game);

@@ -12,7 +12,12 @@ class Welcome extends Component {
     }
   }
   async componentDidMount() {
-    await say('first-welcome');
+    await say('welcome-1');
+    await say('welcome-2');
+    await say('welcome-3');
+    await say('welcome-4');
+    await say('welcome-5');
+    await say('welcome-6');
     this.props.letSpeak(true);
   }
   async componentWillReceiveProps(nextProps) {
@@ -20,12 +25,13 @@ class Welcome extends Component {
       if (this.props.lastSpeakResult.text !== nextProps.lastSpeakResult.text) {
         this.props.letSpeak(false);
         if (this.state.nameTries === 0) {
-          await say('name-first');
+          await say('name-first-1');
+          await say('name-first-2');
           this.setState({ nameTries: 1 });
           this.props.letSpeak(true);
         } else {
-          await say('name-second1');
-          await say('name-second2');
+          await say('name-second-1');
+          await say('name-second-2');
           const newUser = await createUser("dumbhead1");
           this.props.userCreated(newUser);
           this.props.nextPhase();

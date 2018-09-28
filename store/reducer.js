@@ -3,7 +3,7 @@ import {
 } from './actions';
 
 export const initialState = {
-  gamePhase: 'shuffle', // welcome | shuffle | takeBet | betTaken | result | gameOver
+  gamePhase: 'welcome', // welcome | shuffle | takeBet | betTaken | result | gameOver
   lastSpeakResult: { text: null },
   userName: '',
   balance: 0,
@@ -68,6 +68,7 @@ export const reducer = (state = initialState, action) => {
         ...state,
         bet: null,
         check: null,
+        result: null,
       }
     }
     case LET_SPEAK: {
