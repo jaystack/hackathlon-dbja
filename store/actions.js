@@ -15,9 +15,19 @@
 // );
 
 export const CHANGE_GAME_PHASE = 'CHANGE_GAME_PHASE';
-export const chamgeGamePhase = (phase) => ({
+export const changeGamePhase = (phase) => ({
   type: CHANGE_GAME_PHASE,
   payload: { phase }
+});
+
+export const NEXT_GAME_PHASE = 'NEXT_GAME_PHASE';
+export const nextGamePhase = (phase) => ({
+  type: NEXT_GAME_PHASE,
+});
+
+export const RESET = 'RESET';
+export const reset = () => ({
+  type: RESET,
 });
 
 export const SPEAK_RESULT = 'SPEAK_RESULT';

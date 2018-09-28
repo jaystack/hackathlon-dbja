@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Head from 'next/head';
 import speak from '../lib/speaker';
-import { speakResult } from '../store/actions';
+import { speakResult, reset } from '../store/actions';
 
 
 class Layout extends Component {
@@ -43,6 +43,11 @@ class Layout extends Component {
             {this.state.isSpeaking &&
               <span>...</span>
             }
+            <button
+              onClick={() => this.props.reset()}
+            >
+              Reset game
+            </button>
           </div>
         </div>
       </div>
@@ -57,6 +62,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   speakResult: (result) => dispatch(speakResult(result)),
+  reset: () => dispatch(reset()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Layout);

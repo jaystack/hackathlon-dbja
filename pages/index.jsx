@@ -26,7 +26,6 @@ class Index extends Component {
 
 
   getBody() {
-    console.log(this.props.gamePhase)
     switch (this.props.gamePhase) {
       case 'welcome' : return <Welcome />;
       case 'game' : return <Game />;
