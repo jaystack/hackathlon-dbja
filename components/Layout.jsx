@@ -42,7 +42,7 @@ class Layout extends Component {
             >
               Speak
             </button>
-            <div class="michrophone"></div>
+            <div className={!this.props.letSpeak || this.state.isSpeaking ? "michrophone disabled" : "michrophone"}></div>
             {this.state.isSpeaking &&
               <span>...</span>
             }
