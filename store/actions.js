@@ -9,9 +9,9 @@ export const nextGamePhase = (phase) => ({
   type: NEXT_GAME_PHASE,
 });
 
-export const TAKE_BET_SUCCESS = 'TAKE_BET_SUCCESS';
-export const takeBetSuccess = (bet, check) => ({
-  type: TAKE_BET_SUCCESS,
+export const TAKE_BET = 'TAKE_BET';
+export const takeBet = (bet, check) => ({
+  type: TAKE_BET,
   payload: { bet, check },
 });
 
@@ -19,14 +19,6 @@ export const CLEAR_BET = 'CLEAR_BET';
 export const clearBet = () => ({
   type: CLEAR_BET,
 });
-
-export const takeBet = (bet, check) => dispatch => (
-  new Promise((resolve) => {
-    
-    dispatch(takeBetSuccess(bet, check));
-    resolve();
-  })
-);
 
 export const BOOK_RESULT = 'BOOK_RESULT';
 export const bookResult = () => ({
