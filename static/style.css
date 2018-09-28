@@ -37,7 +37,8 @@
 }
 
 .coin {
-  color: yellow;
+      color: #32dab5;
+    text-shadow: 1px 1px 8px rgb(0, 0, 0);
   font-size: 50px;
   position: fixed;
   right: 16%;
@@ -49,7 +50,8 @@
 }
 
 .msg {
-  color: yellow;
+      color: #32dab5;
+    text-shadow: 1px 1px 8px rgb(0, 0, 0);
   font-size: 40px;
   position: fixed;
   left: 50%;
@@ -62,7 +64,8 @@
 }
 
 .bet {
-  color: yellow;
+      color: #32dab5;
+    text-shadow: 1px 1px 8px rgb(0, 0, 0);
   font-size: 40px;
   position: fixed;
   left: 21%;
@@ -76,7 +79,8 @@
 }
 
 .round {
-  color: yellow;
+      color: #32dab5;
+    text-shadow: 1px 1px 8px rgb(0, 0, 0);
   font-size: 40px;
   position: fixed;
   right: 24%;
@@ -113,7 +117,8 @@
 
 
 .username {
-    color: yellow;
+        color: #32dab5;
+    text-shadow: 1px 1px 8px rgb(0, 0, 0);
     font-size: 40px;
     position: fixed;
     left: 50%;
@@ -139,7 +144,8 @@
   }
 
   .gameover {
-    color: yellow;
+        color: #32dab5;
+    text-shadow: 1px 1px 8px rgb(0, 0, 0);
     font-size: 40px;
     position: fixed;
     left: 50%;
@@ -151,7 +157,8 @@
   }
 
   .shuffling {
-    color: yellow;
+        color: #32dab5;
+    text-shadow: 1px 1px 8px rgb(0, 0, 0);
     font-size: 40px;
     position: fixed;
     left: 50%;
