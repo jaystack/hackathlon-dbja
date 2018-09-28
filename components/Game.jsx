@@ -141,6 +141,9 @@ class Game extends Component {
         }
 
         <div id="anim" className="anim"></div>
+
+        <div className="gameover">Game over</div>
+        <div className="shuffling">Shuffling</div>
       </div>
     )
   }
